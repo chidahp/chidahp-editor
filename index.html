@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เครื่องมือจัดหน้าแบบชี้ดาบ - Cheedab Web Formatting & Pacing Editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="ยกระดับงานเขียนสู่ศาสตร์แห่งการสื่ออารมณ์และเคาะจังหวะแบบชี้ดาบ เครื่องมือจัดหน้าหนังสือและวิเคราะห์จังหวะการเล่าเรื่องแบบเรียลไทม์">
+</head>
+<body>
+
+  <!-- Premium Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">✥</div>
+      <div class="logo-text">เครื่องมือจัดหน้าแบบชี้ดาบ</div>
+      <span class="glowing-amber-dot"></span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-primary btn-sm btn-glowing-gold" id="btn-auto-format" style="margin-right: 8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        จัดหน้าอัจฉริยะ (Auto-Format)
+      </button>
+      <button class="btn btn-outline-gold btn-sm" id="btn-examples">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        ตัวอย่าง & บทเรียน
+      </button>
+
+      <button class="btn btn-primary btn-sm" id="btn-export">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        ส่งออก (Export)
+      </button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    
+    <!-- Left Sidebar: Controls & Linter -->
+    <aside class="sidebar">
+      
+      <!-- Section 1: Book Settings -->
+      <div class="sidebar-section">
+        <h3>
+          <span>ตั้งค่ารูปเล่ม</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </h3>
+        
+        <div class="control-group">
+          <div class="control-label">
+            <span>ฟอนต์ (Font Type)</span>
+          </div>
+          <select id="config-font-family">
+            <option value="font-serif">Pridi (มีหัวกึ่งทางการ / หรูหรา)</option>
+            <option value="font-sans" selected>Sarabun & Bai Jamjuree (อ่านง่ายสไตล์โมเดิร์น)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>ขนาดอักษร (Font Size)</span>
+            <span class="control-val" id="val-font-size">16px</span>
+          </div>
+          <input type="range" id="config-font-size" min="12" max="22" value="16">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>จำนวนบรรทัดสูงสุด / หน้า</span>
+            <span class="control-val" id="val-lines-page">16 บรรทัด</span>
+          </div>
+          <input type="range" id="config-lines-page" min="10" max="24" value="16">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>ความสูงบรรทัด (Line Height)</span>
+            <span class="control-val" id="val-line-height">1.7</span>
+          </div>
+          <input type="range" id="config-line-height" min="1.4" max="2.2" step="0.1" value="1.7">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>ขอบกระดาษ (Margins)</span>
+            <span class="control-val" id="val-margins">Medium</span>
+          </div>
+          <select id="config-margins">
+            <option value="narrow">Narrow (ขอบแคบ - จุได้เยอะ)</option>
+            <option value="medium" selected>Medium (สัดส่วนปกติ)</option>
+            <option value="wide">Wide (ขอบกว้าง - มินิมอลมีสเปซ)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section 2: Smart Cheedab Linter -->
+      <div class="sidebar-section" style="flex: 1; border-bottom: none;">
+        <h3>
+          <span>ตัวแนะนำการจัดจังหวะ</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </h3>
+        
+        <div class="linter-list" id="linter-container">
+          <!-- Populated dynamically via JS -->
+          <div class="empty-linter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>จังหวะการเล่าเรื่องลื่นไหลยอดเยี่ยม! ไม่พบข้อผิดพลาดตามกฎชี้ดาบ</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Workspace Split -->
+    <div class="workspace-split">
+      
+      <!-- Editor Pane (Left) -->
+      <main class="editor-pane">
+        <div class="pane-header">
+          <div class="pane-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            พื้นที่ขัดเกลาคำ (Cheedab Editor)
+          </div>
+          <div class="pane-actions">
+            <button class="btn btn-outline-gold btn-sm" id="btn-clear" style="padding: 4px 8px;">
+              ล้างข้อความ
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <div class="textarea-container">
+            <div class="line-numbers" id="line-numbers-col">1<br>2<br>3<br>4<br>5</div>
+            <textarea class="editor-input" id="editor-input" placeholder="พิมพ์ข้อความของคุณที่นี่...
+เคาะ 1 ครั้ง (Enter) = เคาะใจความ
+เคาะ 2 ครั้ง (Enter 2 ครั้ง) = เคาะย่อหน้าใหม่
+
+ลองเปิดบทด้วยครึ่งหน้า หรือเลือกฟังก์ชันจากทูลบาร์ด้านล่างเพื่อแปลงอารมณ์"></textarea>
+          </div>
+        </div>
+
+        <!-- Quick Formatting Tools Bar -->
+        <div class="quick-tools-bar">
+          <button class="btn btn-outline-gold btn-sm" id="tool-hook" title="แปลงประโยคที่เลือกเป็นประโยค Hook ที่เว้นระยะสวยงามพร้อมเน้นสีและสไตล์">
+            <strong>[H]</strong> บรรทัด Hook
+          </button>
+          <button class="btn btn-outline-gold btn-sm" id="tool-pause" title="ใส่จุดพัก ... เพื่อเว้นอารมณ์กระดาษและบาลานซ์หน้า">
+            <strong>...</strong> จุดหยุด (Pause)
+          </button>
+          <button class="btn btn-outline-gold btn-sm" id="tool-divider" title="ใส่สัญลักษณ์คั่นอารมณ์ระหว่างตอน">
+            <strong>✥</strong> ตัวคั่นการอ่าน (Divider)
+          </button>
+          <div class="tool-sep"></div>
+          <button class="btn btn-sm" id="tool-indent" title="จัดย่อหน้าให้เป็นระเบียบ">
+            จัดย่อหน้าอัตโนมัติ
+          </button>
+          <button class="btn btn-sm" id="tool-push" title="ผลักประโยคคมขึ้นหน้าใหม่แบบเฉียบคม">
+            ผลักขึ้นหน้าใหม่
+          </button>
+        </div>
+      </main>
+
+      <!-- Book Preview Simulator (Right) -->
+      <section class="preview-pane">
+        <div class="pane-header" style="background-color: rgba(19, 21, 27, 0.4); border-bottom-color: rgba(43, 48, 60, 0.4);">
+          <div class="pane-title" style="color: #ffffff;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            ตัวจำลองหน้าหนังสือจริง (Book Preview Simulator)
+          </div>
+          <div class="pane-actions">
+            <span class="badge" id="layout-indicator" style="background: rgba(212,175,55,0.2); color: var(--color-gold); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px;">หน้าคู่ (Spread)</span>
+          </div>
+        </div>
+
+        <div class="book-viewport">
+          <div class="book-wrapper" id="book-wrapper">
+            <div class="book-spine"></div>
+            
+            <!-- Left Page Mockup -->
+            <div class="book-page left-page" id="left-page">
+              <div class="book-header">
+                <span id="left-header-title">เครื่องมือจัดหน้าแบบชี้ดาบ</span>
+                <span id="left-header-chapter">ตอนที่ 1</span>
+              </div>
+              <div class="book-body font-sans" id="left-page-body">
+                <!-- Injected dynamically -->
+              </div>
+              <div class="book-footer">
+                <span id="left-page-num">1</span>
+              </div>
+            </div>
+
+            <!-- Right Page Mockup -->
+            <div class="book-page right-page" id="right-page">
+              <div class="book-header">
+                <span id="right-header-title">เครื่องมือจัดหน้าแบบชี้ดาบ</span>
+                <span id="right-header-chapter">ตอนที่ 1</span>
+              </div>
+              <div class="book-body font-sans" id="right-page-body">
+                <!-- Injected dynamically -->
+              </div>
+              <div class="book-footer">
+                <span id="right-page-num">2</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Book Navigation -->
+        <div class="book-navigation">
+          <button class="nav-btn" id="btn-prev-page" title="หน้าก่อนหน้า" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="page-counter" id="page-counter">หน้า 1 - 2 จากทั้งหมด 2 หน้า</span>
+          <button class="nav-btn" id="btn-next-page" title="หน้าถัดไป" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Tutorial & Lessons Modal -->
+  <div class="tutorial-overlay" id="tutorial-overlay">
+    <div class="tutorial-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gold);"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          หลักสูตรการเขียนและจัดหน้าแบบชี้ดาบ
+        </h2>
+        <button class="modal-close" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem;">
+          การจัดหน้าแบบชี้ดาบไม่ใช่แค่เรื่องของความสวยงาม แต่เป็น <strong>"ศาสตร์แห่งการควบคุมความรู้สึกและจังหวะของผู้อ่าน"</strong> (Emotional Pacing) เรียนรู้กฎเหล็กและลองกดโหลดตัวอย่างเพื่อฝึกปรือได้ด้านล่างนี้เลย:
+        </p>
+        
+        <div class="preset-grid">
+          
+          <div class="preset-card" data-preset="intro">
+            <div class="preset-title">📖 บทแนะนำ: อะไรคือการจัดหน้าแบบชี้ดาบ?</div>
+            <div class="preset-desc">เรียนรู้ความหมายของการเขียนเพื่อสื่อสารอารมณ์ (Emotional Writing) และการจัดหน้าแทนเครื่องหมายจบประโยคของภาษาไทย</div>
+          </div>
+
+          <div class="preset-card" data-preset="example1">
+            <div class="preset-title">🔥 กฎข้อที่ 1 & 3: เริ่มต้นครึ่งหน้า และ การล้างซีนแช่</div>
+            <div class="preset-desc">ดูตัวอย่างเนื้อเรื่องจริงของการลุกขึ้นยืนยื่นใบลาออก "หนูขอลาออกค่ะ" ที่ตัดเสียงรบกวนและจูนหัวใจผู้อ่านให้ตื่นเต้นที่สุด</div>
+          </div>
+
+          <div class="preset-card" data-preset="example2">
+            <div class="preset-title">❄️ การลบซีนแช่ (Static Scenes)</div>
+            <div class="preset-desc">ศึกษาทฤษฎีการตัดส่วนบรรยายสภาพอากาศหรืออารมณ์วนซ้ำที่ไม่เกิดผลต่อเรื่อง (มกราที่ยาวนาน...) เพื่อป้องกันการข้ามหน้ากระดาษของผู้อ่าน</div>
+          </div>
+
+          <div class="preset-card" data-preset="rhythm-exercise">
+            <div class="preset-title">🥁 กฎการเคาะจังหวะ และการวางแนว Hook</div>
+            <div class="preset-desc">ศึกษาทฤษฎี เคาะใจความ (Enter 1) เคาะย่อหน้า (Enter 2) และตัวอย่าง Trist Issue ในวัยเด็กเรื่องผีปลายเตียงดึงขา</div>
+          </div>
+
+          <div class="preset-card" data-preset="word-groups">
+            <div class="preset-title">🧩 เคล็ดวิชา: ย่อหน้า vs ใจความ vs กลุ่มคำ vs อารมณ์</div>
+            <div class="preset-desc">เรียนรู้วิธีการจัดกลุ่มคำไม่ให้หักกลาง เช่น ไฟลท์บินโตเกียว-ฮาเนดะ เพื่อรักษาสมดุลความเข้าใจและการเน้นคำอารมณ์อย่าง "เชี่ย..."</div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-close-modal-footer">พร้อมลงมือฝึกฝนแล้ว</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Toast Notifications -->
+  <div class="toast" id="toast">
+    <div class="toast-icon">✥</div>
+    <div class="toast-text" id="toast-text">สำเร็จ! จัดแต่งจังหวะเรียบร้อยแล้ว</div>
+  </div>
+
+  <!-- JS Engine -->
+  <script src="app.js"></script>
+</body>
+</html>
